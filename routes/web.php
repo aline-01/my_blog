@@ -17,6 +17,7 @@ use App\Models\blog;
 |
 */
 
+
 Route::get('/', function () {
     $all_blogs = blog::all();
     return view('index',["all_blogs"=>$all_blogs]);

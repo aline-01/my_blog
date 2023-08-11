@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string("title");
             $table->string("picture");
             $table->longText("content");
-            $table->string("writer");
+            $table->integer("writer");
             $table->string("date_persian")->default("we dont have yet");
             $table->boolean("is_accepted")->default(0);
+            $table->foreign("writer")->referece("id")->on("users");
             $table->timestamps();
         });
     }
