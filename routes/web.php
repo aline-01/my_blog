@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::prefix("/blogs")->group(function() {
     $blog_controller = "App\Http\Controllers\blogs";
     Route::get("/blog/{blog_title}",$blog_controller."@single_page");
+    Route::post("/addComment",$blog_controller."@add_comment");
 });
 
 Route::prefix("/users")->group(function() {
@@ -47,5 +48,9 @@ Route::group(["prefix"=>"/admins", "middleware"=>["App\Http\Middleware\admin_acc
     Route::get("/delete/{id}",$admin_controller."@delete_blog");
     Route::get("/social_bar",$admin_controller."@social_bar");
     Route::post("/social_bar",$admin_controller."@social_bar");
+    Route::get("/comments",$admin_controller."@comments");
+});
 
+Route::get("/email_test",function() {
+    Mail::to("aaryn3942@gmail.com")->send();
 });

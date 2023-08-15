@@ -4,7 +4,7 @@
          <div class="container">
             <div class="row">
                <div class="col-md-2">
-                  <img src="img/logo.png" alt="" class="logo">
+                  <!-- <img src="img/logo.png" alt="" class="logo"> -->
                </div>
                <div class="col-md-5">
                   <form method="" action="" class="search-form">
@@ -29,11 +29,9 @@
          <div class="row">
             <div class="col-md-3">
                <div class="sidebar">
-                  <div class="sidebar-text">
-                     <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. </p>
-                  </div>
+
                   <?php include("includes/layouts/social_bar.blade.php"); ?>
-                  <div class="category-sidebar">
+                  <!-- <div class="category-sidebar">
                      <span><i class="fa fa-bookmark"></i>دسته بندی مطالب</span>
                      <ul>
                         <li><a href="#">دنبال کردن در تلگرام</a></li>
@@ -55,7 +53,7 @@
                            </a>
                         </li>
                      </ul>
-                  </div>
+                  </div> -->
                </div>
             </div>
             <div class="col-md-9">
@@ -95,7 +93,7 @@
                </div>
                <?php foreach($all_blogs->all() as $blog) { ?>
                  <div class="col-md-4">
-                  <a href="#">
+                  <a href="<?php echo "/blogs/blog/{$blog['title']}" ?>">
                      <div class="post-content">
                         <figure>
                            <img src="/img/blog/<?php echo $blog['picture']; ?>">

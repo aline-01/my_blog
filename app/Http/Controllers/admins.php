@@ -85,5 +85,8 @@ class admins extends Controller
       }
 
     }
+    public function comments() {
+      return view("admins_area.pages.comment");
+    }
 
 }

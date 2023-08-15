@@ -26,59 +26,8 @@
          <div class="row">
             <div class="col-md-3">
                <div class="sidebar">
-                  <div class="sidebar-text">
-                     <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
-                  </div>
-                  <div class="sidebar-social">
-                     <ul>
-                        <li>
-                           <a href="#" class="telegram"><i class="fa fa-send"></i>دنبال کردن در تلگرام</a>
-                        </li>
-                        <li>
-                           <a href="#" class="twitter"><i class="fa fa-twitter"></i>صفحه توئیتر ما</a>
-                        </li>
-                        <li>
-                           <a href="#" class="aparat"><i class="fa fa-video-camera"></i>دنبال کردن در آپارات</a>
-                        </li>
-                        <li>
-                           <a href="#" class="youtube"><i class="fa fa-youtube"></i>کانال یوتیوب</a>
-                        </li>
-                        <li>
-                           <a href="#" class="instagram"><i class="fa fa-instagram"></i>پیج اینستاگرام </a>
-                        </li>
-                     </ul>
-                  </div>
-                  <div class="category-sidebar">
-                     <span><i class="fa fa-bookmark"></i>دسته بندی مطالب</span>
-                     <ul>
-                        <li><a href="#">دنبال کردن در تلگرام</a></li>
-                        <li><a href="#">صفحه توئیتر ما</a></li>
-                        <li><a href="#">دنبال کردن در آپارات</a></li>
-                        <li><a href="#">کانال یوتیوب</a></li>
-                        <li><a href="#">پیج اینستاگرام</a></li>
-                     </ul>
-                  </div>
-                  <div class="category-sidebar ads-sidebar">
-                     <span><i class="fa fa-slack"></i>تبلیغات</span>
-                     <ul>
-                        <li>
-                           <a href="#">
-                              <figure>
-                                 <img src="" alt="">
-                                 <figcaption></figcaption>
-                              </figure>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <figure>
-                                 <img src="img/ads/ads2.jpg" alt="">
-                                 <figcaption></figcaption>
-                              </figure>
-                           </a>
-                        </li>
-                     </ul>
-                  </div>
+                 <?php include("includes/layouts/social_bar.blade.php"); ?>
+
                </div>
             </div>
             <div class="col-md-9">
@@ -91,8 +40,8 @@
                         <ul>
                            <li><a href="#" title="98/6/21" data-toggle="tooltip"><i class="fa fa-calendar-o"></i></a></li>
                            <li><a href="#" title="98/8/8" data-toggle="tooltip"><i class="fa fa-reply"></i></a></li>
-                           <li><a href="#" title="<?php echo $writer;  ?>" data-toggle="tooltip"><i class="fa fa-user-o"></i></a></li>
-                           <li><a href="#" title="اخبار ، ورزش" data-toggle="tooltip"><i class="fa fa-bars"></i></a></li>
+                           <li><a href="#" title="نویسنده:<?php echo $writer;  ?>" data-toggle="tooltip"><i class="fa fa-user-o"></i></a></li>
+                           <li><a href="#" title="بازدید:<?php echo $blog_view; ?>" data-toggle="tooltip"><i class="fa fa-eye"></i></a></li>
                            <li><a href="#" title="اشتراک در توئیتر" data-toggle="tooltip"><i class="fa fa-twitter"></i></a></li>
                            <li><a href="#" title="اشتراک در فیس بوک" data-toggle="tooltip"><i class="fa fa-facebook"></i></a></li>
                            <li><a href="#" title="اشتراک در لینکدین" data-toggle="tooltip"><i class="fa fa-linkedin"></i></a></li>
@@ -105,7 +54,9 @@
                      <hr>
                      <div class="comment">
                         <span><i class="fa fa-comments"></i>نظری برای این مطلب بنویسید</span>
-                        <form action="" method="">
+                        <form action="/blogs/addComment" method="post">
+                           @csrf
+                           <input type="hidden" name="blog_id" value="<?php echo  $blog_content[0]->id; ?>">
                            <div class="form-group col-md-6">
                               <input class="form-control" type="text" name="user_name" placeholder="نام خود را وارد کنید" >
                            </div>
