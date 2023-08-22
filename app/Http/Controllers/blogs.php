@@ -21,11 +21,13 @@ class blogs extends Controller
             "blog_id"=>$this_blog[0]["id"],
         ]);
         $blog_view = DB::table("blog_view")->where("blog_id",$this_blog[0]["id"])->get();
+        $comments = comments::all()->where("is_accepted",1);
         return view("blogs.single",[
           "blog_title"=>$blog_title,
           "blog_content"=>$this_blog,
           "writer"=>$writer->username,
           "blog_view"=>$blog_view->count(),
+          "comments"=>$comments,
         ]);
       }
     }

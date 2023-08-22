@@ -31,9 +31,9 @@ Route::prefix("/blogs")->group(function() {
 
 Route::prefix("/users")->group(function() {
     $users_controller = "App\Http\Controllers\user_auth";
-    Route::get("/login",$users_controller."@login");
+    Route::get("/login",$users_controller."@login")->name("login");
     Route::post("/login",$users_controller."@login");
-    Route::get("/register",$users_controller."@register");
+    Route::get("/register",$users_controller."@register")->name("register");
     Route::post("/register",$users_controller."@register");
     Route::get("/exit",$users_controller."@logout");
 });
@@ -49,8 +49,12 @@ Route::group(["prefix"=>"/admins", "middleware"=>["App\Http\Middleware\admin_acc
     Route::get("/social_bar",$admin_controller."@social_bar");
     Route::post("/social_bar",$admin_controller."@social_bar");
     Route::get("/comments",$admin_controller."@comments");
+    Route::get("/comments/{oprations_type}/{id}",$admin_controller."@comment_proc");
 });
 
-Route::get("/email_test",function() {
-    Mail::to("aaryn3942@gmail.com")->send();
+Route::get("/test",function() {
+    $password = "alien_test";
+    dd(Hash::make($password));
+
+
 });

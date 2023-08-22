@@ -18,7 +18,7 @@
                     <a class="nav-link" href="/admins/addBlog">Add blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/pages/comment.php">Comments</a>
+                    <a class="nav-link" href="/admins/comments">Comments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="/admins/social_bar">social media</a>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\users;
 use App\Models\blog;
+use App\Models\comments;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
@@ -81,12 +82,26 @@ class admins extends Controller
             "telegram"=>request()->Telegram,
           ]);
           return back();
-
       }
 
     }
     public function comments() {
-      return view("admins_area.pages.comment");
+      $all_comments = comments::all()->where("is_accepted",0);
+      return view("admins_area.pages.comment",[
+        "all_comments"=>$all_comments,
+      ]);
+    }
+    public function comment_proc($process,$id) {
+      $current_comment = comments::findOrFail($id);
+      if ($current_comment->count() == 0) { return back(); }
+      if ($process == "accept") {
+        $current_comment->update([
+            "is_accepted"=>1,
+        ]);
+      }else {
+        $current_comment->delete();
+      }
+      return back();
     }
 
 }

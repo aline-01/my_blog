@@ -13,7 +13,7 @@ if (!is_null(session()->get("login_info"))) {
 <br><br><br><br><br><br>
   <div class="container">
     <h2>فرم ورود</h2>
-    <form method="POST" action="/users/login">
+    <form method="POST" action="<?php route("login"); ?>">
       @csrf
       <div class="form-group">
         <label for="username">نام کاربری</label>

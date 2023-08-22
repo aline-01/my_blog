@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\users;
+use Hash;
 
 class user_auth extends Controller
 {
@@ -19,7 +20,9 @@ class user_auth extends Controller
           "username.required"=>"نام کاربری خود را وارد کنید",
           "password.required"=>"رمز عبور خود را وارد کنید",
           ])->validate();
-          $this_user = users::select("id","username")->where("username",request()->username)->where("password",request()->password)->get();
+          $hashed_password = Hash::make(request()->password);
+          dd($hashed_password);
+          $this_user = users::select("id","username")->where("username",request()->username)->where("password",$hashed_password)->get();
           if ($this_user->count() > 0) {
               $expire = time() * 5000;
               cookie()->queue(cookie('users_access', $this_user[0]->id, $expire));
@@ -30,7 +33,6 @@ class user_auth extends Controller
           }
       }
     }
-
     public function register() {
       if (is_null(request()->submit) == true) {
         return view("users.login.register");
@@ -38,7 +40,7 @@ class user_auth extends Controller
         // dd(request()->all);
         $validator = Validator::make(request()->all(),[
           "name"=>"required|min:2",
-          "username"=>"required|min:3|max:90",
+          "username"=>"required|min:3|max:90|unique:users",
           "email"=>"required|email",
           "password"=>"required|min:8|max:245",
         ],[
@@ -46,20 +48,22 @@ class user_auth extends Controller
           "name.min"=>"نام باید بیش از 3 کاراکتر باشد",
           "username.required"=>"لطفا نام کاربری خود را وارد کنید",
           "username.min"=>"نام کاربری باید بیشتر از 3 کاراکتر باشد",
+          "username.unique"=>"نام کاربری قبلاً استفاده شده است",
           "email.required"=>"ایمیل خود را وارد کنید",
           "email.email"=>"لطفا یک آدرس ایمیل معتبر وارد کنید",
           "password.required"=>"رمز عبور خود را وارد کنید",
           "password.min"=>"رمز عبور باید حداقل ۸ کاراکتر باشد",
         ])->validate();
+        $hashed_password = Hash::make(request()->password);
         users::create([
           "name"=>request()->name,
           "username"=>request()->username,
-          "password"=>request()->password,
+          "password"=>$hashed_password,
           "email"=>request()->email,
         ]);
         $login_value = [request()->username,request()->password];
         // $request->session()->put('key', 'value');
-        session()->put("login_info",$login_value);
+          session()->put("login_info",$login_value);
         return redirect("users/login");
       }
     }
